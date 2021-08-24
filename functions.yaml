@@ -1,0 +1,6 @@
+# TODO: generate a functions.h macro defs file from this.
+elf_segment_index: 0
+elf_segment_vaddr: 0x81000000
+functions:
+- name: play_mp4
+  vaddr: 0x81051910
