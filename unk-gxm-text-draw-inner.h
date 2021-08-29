@@ -1,6 +1,6 @@
 #pragma once
 
-typedef int (*t_FUN_8100b8ca) (uint32_t, uint32_t, uint32_t);
+typedef undefined4 (*t_FUN_8100b8ca) (void);
 #define FUN_8100b8ca(...) ((t_FUN_8100b8ca)0x8100b8ca)(__VA_ARGS__)
 
 typedef int (*t_FUN_81008824) (ushort);
@@ -9,7 +9,7 @@ typedef int (*t_FUN_81008824) (ushort);
 typedef void (*t_FUN_81070b90) (int*, undefined4*);
 #define FUN_81070b90(...) ((t_FUN_81070b90)0x81070b90)(__VA_ARGS__)
 
-typedef void (*t_FUN_8100b8d6) (int, int, uint, uint);
+typedef void (*t_FUN_8100b8d6) (int);
 #define FUN_8100b8d6(...) ((t_FUN_8100b8d6)0x8100b8d6)(__VA_ARGS__)
 
 typedef undefined4 (*t_FUN_8100cb52) (void);
@@ -34,14 +34,14 @@ typedef void (*t_FUN_8100c588) (void);
 typedef void (*t_FUN_8100b9a6) (int, int);
 #define FUN_8100b9a6(...) ((t_FUN_8100b9a6)0x8100b9a6)(__VA_ARGS__)
 
-typedef undefined4 (*t_FUN_8100b9c4) (undefined4);
+typedef float (*t_FUN_8100b9c4) (float);
 #define FUN_8100b9c4(...) ((t_FUN_8100b9c4)0x8100b9c4)(__VA_ARGS__)
 
-typedef void (*t_FUN_81013278) (undefined4, undefined4);
+typedef void (*t_FUN_81013278) (uint, void*);
 #define FUN_81013278(...) ((t_FUN_81013278)0x81013278)(__VA_ARGS__)
 
 // TODO totally borked, Ghidra is very wrong somewhere
-typedef void (*t_FUN_8100c288) (float, float);
+typedef void (*t_FUN_8100c288) (void);
 #define FUN_8100c288(...) ((t_FUN_8100c288)0x8100c288)(__VA_ARGS__)
 
 // retyped using the SceGxm* function it wraps
@@ -52,11 +52,11 @@ typedef void (*t_FUN_8100c0fc) (int, uint);
 #define FUN_8100c0fc(...) ((t_FUN_8100c0fc)0x8100c0fc)(__VA_ARGS__)
 
 // TODO broken args...
-typedef undefined4 (*t_FUN_8100cb66) (undefined4);
+typedef undefined4 (*t_FUN_8100cb66) (void);
 #define FUN_8100cb66(...) ((t_FUN_8100cb66)0x8100cb66)(__VA_ARGS__)
 
 // TODO ugh...
-typedef undefined4* (*t_FUN_81008766) (undefined4, undefined4, undefined4, undefined4, undefined4, undefined4, undefined4, undefined4, undefined4, undefined4);
+typedef undefined4* (*t_FUN_81008766) (undefined4, undefined4, undefined4, undefined4, undefined4, undefined4, undefined4, undefined4, undefined4, undefined4, undefined4);
 #define FUN_81008766(...) ((t_FUN_81008766)0x81008766)(__VA_ARGS__)
 
 /*

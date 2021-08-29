@@ -9,8 +9,8 @@ float unk_gxm_text_draw(int param_1,int param_2,int param_3,uint param_4,ushort 
   longlong lVar1;
   longlong lVar2;
   longlong lVar3;
-  undefined *puVar4;
-  uint uVar5;
+  undefined4 *puVar4;
+  undefined *puVar5;
   int iVar6;
   void *uVar7;
   ushort *puVar7;
@@ -21,10 +21,11 @@ float unk_gxm_text_draw(int param_1,int param_2,int param_3,uint param_4,ushort 
   int iVar12;
   int iVar13;
   int iVar14;
-  float fVar15;
+  uint uVar15;
   float fVar16;
   float fVar17;
   float fVar18;
+  float fVar19;
   int local_1d8;
   int local_1d4;
   int local_1d0;
@@ -41,7 +42,7 @@ float unk_gxm_text_draw(int param_1,int param_2,int param_3,uint param_4,ushort 
   float local_a8;
   float local_a4;
   uint local_a0;
-  int local_9c;
+  undefined4 *local_9c;
   uint local_98;
   uint local_94;
   float local_90;
@@ -50,7 +51,7 @@ float unk_gxm_text_draw(int param_1,int param_2,int param_3,uint param_4,ushort 
   int local_84;
   int local_80;
   uint local_7c;
-  int local_78;
+  undefined4 *local_78;
   int local_74;
   int local_70;
   int local_6c;
@@ -67,15 +68,14 @@ float unk_gxm_text_draw(int param_1,int param_2,int param_3,uint param_4,ushort 
   local_8c = DAT_8119d434;
   local_b8 = 0;
   local_90 = DAT_8119d438;
-  uVar5 = ((param_4 >> 0x18) * 0xa0) / 0xff;
   local_94 = DAT_8119d448 & 0x7f;
-  local_6c = uVar5 << 0x18;
+  local_6c = ((param_4 >> 0x18) * 0xa0) / 0xff << 0x18;
   local_b4 = param_3;
   local_b0 = param_1;
   local_98 = param_4;
   local_60 = param_4;
   local_58 = param_2;
-  local_9c = FUN_8100b8ca(uVar5,local_94,(param_4 >> 0x18) * 0x505050a0);
+  local_9c = (undefined4 *)FUN_8100b8ca();
   local_1c4 = (int *)0x0;
   iVar13 = 0;
   local_1c0 = (int *)0x0;
@@ -159,23 +159,23 @@ float unk_gxm_text_draw(int param_1,int param_2,int param_3,uint param_4,ushort 
     }
     local_1b8[iVar12] = (ushort)iVar14;
   }
-  puVar4 = local_88;
+  puVar5 = local_88;
   iVar13 = local_b8;
   local_68 = (short)iVar14;
   if ((local_54 & 9) != 0) {
     puVar7 = local_1b8;
-    uVar5 = local_54;
+    uVar15 = local_54;
     local_74 = iVar14;
     uVar8 = local_1b8[0];
     if (local_1b8[0] != 0) {
       do {
         puVar7 = puVar7 + 1;
         iVar12 = FUN_81008824(uVar8);
-        iVar12 = (int)*(char *)(*(int *)(puVar4 + iVar12 * 8 + 0x48) + 6) + *(int *)(puVar4 + 0x850)
+        iVar12 = (int)*(char *)(*(int *)(puVar5 + iVar12 * 8 + 0x48) + 6) + *(int *)(puVar5 + 0x850)
         ;
         if (uVar8 == 10) {
           iVar12 = iVar13;
-          if ((*(uint *)(puVar4 + 0x880) & 1) == 0) {
+          if ((*(uint *)(puVar5 + 0x880) & 1) == 0) {
             local_1d4 = -iVar14;
             FUN_81070b90(&auStack456,&local_1d4);
             iVar14 = iVar13;
@@ -189,10 +189,10 @@ float unk_gxm_text_draw(int param_1,int param_2,int param_3,uint param_4,ushort 
         iVar14 = iVar14 + iVar12;
         uVar8 = *puVar7;
       } while (*puVar7 != 0);
-      uVar5 = *(uint *)(puVar4 + 0x880);
+      uVar15 = *(uint *)(puVar5 + 0x880);
       local_74 = iVar14;
     }
-    if ((uVar5 & 1) == 0) {
+    if ((uVar15 & 1) == 0) {
       local_1cc = -local_74;
       FUN_81070b90(&auStack456,&local_1cc);
       iVar14 = *local_1c4;
@@ -218,9 +218,9 @@ float unk_gxm_text_draw(int param_1,int param_2,int param_3,uint param_4,ushort 
       local_80 = (iVar13 + ((int)(iVar13 + ((uint)(iVar13 >> 0x1f) >> 0x1c)) >> 4) * -0x10) * 0x20 +
                  2;
       local_84 = ((int)(iVar13 + ((uint)(iVar13 >> 4) >> 0x1c)) >> 4) * 0x20 + 1;
-      fVar15 = local_ac + (float)(longlong)(*(char *)(iVar14 + 4) + local_74) * local_8c;
+      fVar16 = local_ac + (float)(longlong)(*(char *)(iVar14 + 4) + local_74) * local_8c;
       local_70 = (int)*(char *)(iVar14 + 6) + *(int *)(local_88 + 0x850);
-      fVar16 = (float)(longlong)local_58 + (float)(longlong)(int)*(char *)(iVar14 + 5) * local_90;
+      fVar17 = (float)(longlong)local_58 + (float)(longlong)(int)*(char *)(iVar14 + 5) * local_90;
       if (local_1b8[0] == 10) {
         local_70 = local_b8;
         if ((*(uint *)(local_88 + 0x880) & 4) == 0) {
@@ -238,28 +238,30 @@ LAB_81008e2a:
       else {
         if ((local_94 != 1) && (local_94 == 2)) {
           iVar13 = local_80 + local_a0;
-          fVar17 = local_a4 + fVar15;
-          fVar18 = local_a8 + fVar16;
+          iVar14 = local_7c + local_84;
+          fVar18 = local_a4 + fVar16;
+          fVar19 = local_a8 + fVar17;
           lVar2 = (longlong)local_80;
           pcVar11 = &DAT_8109afe8;
           lVar3 = (longlong)local_84;
-          iVar14 = 8;
+          iVar12 = 8;
           do {
-            local_78 = FUN_81008766((float)(longlong)(int)*pcVar11 + fVar15,
-                                    (float)(longlong)(int)pcVar11[1] + fVar16,
-                                    (float)(longlong)(int)*pcVar11 + fVar17,
-                                    (float)(longlong)(int)pcVar11[1] + fVar18,(float)lVar1,
-                                    (float)lVar2,(float)lVar3,(float)(longlong)iVar13,local_78,
-                                    local_6c);
-            iVar14 = iVar14 + -1;
+            local_78 = FUN_81008766((float)(longlong)(int)*pcVar11 + fVar16,
+                                    (float)(longlong)(int)pcVar11[1] + fVar17,
+                                    (float)(longlong)(int)*pcVar11 + fVar18,
+                                    (float)(longlong)(int)pcVar11[1] + fVar19,(float)lVar1,
+                                    (float)lVar2,(float)lVar3,(float)(longlong)iVar13,
+                                    (float)(longlong)iVar14,local_78,local_6c);
+            iVar12 = iVar12 + -1;
             pcVar11 = pcVar11 + 2;
-          } while (iVar14 != 0);
+          } while (iVar12 != 0);
         }
         if ((*(uint *)(local_88 + 0x880) & 2) == 0) {
 LAB_81008dd6:
-          local_78 = FUN_81008766(fVar15,fVar16,local_a4 + fVar15,local_a8 + fVar16,(float)lVar1,
+          local_78 = FUN_81008766(fVar16,fVar17,local_a4 + fVar16,local_a8 + fVar17,(float)lVar1,
                                   (float)(longlong)local_80,(float)(longlong)local_84,
-                                  (float)(longlong)(int)(local_80 + local_a0),local_78,local_60);
+                                  (float)(longlong)(int)(local_80 + local_a0),
+                                  (float)(longlong)(int)(local_7c + local_84),local_78,local_60);
           goto LAB_81008e2a;
         }
         if (local_1b8[0] == 0x3010) {
@@ -284,39 +286,39 @@ LAB_81008dd6:
       local_64 = puVar7;
     } while (local_1b8[0] != 0);
   }
-  iVar12 = local_74;
-  iVar14 = local_9c;
+  iVar14 = local_74;
+  puVar4 = local_9c;
   iVar13 = local_b4;
-  uVar5 = local_78 - local_9c;
-  if (uVar5 / 0x18 != 0) {
-    FUN_8100b8d6(local_78,local_78,uVar5,uVar5 * -0x55555555);
+  uVar15 = (uint)((int)local_78 - (int)local_9c) / 0x18;
+  if (uVar15 != 0) {
+    FUN_8100b8d6((int)local_78);
     FUN_8100cb52();
     FUN_8100b986(1);
     FUN_8100cd64(1);
     FUN_8100b952(2);
     FUN_8100c2de(0xffffffff);
     FUN_8100c588();
-    puVar4 = local_88;
+    puVar5 = local_88;
     FUN_8100b9a6(*(undefined4 *)(local_88 + 0x860),0);
     FUN_8100b9c4((float)(longlong)iVar13);
-    if ((*(uint *)(puVar4 + 0x85c) & 0x80) == 0) {
-      uVar7 = *(void **)(puVar4 + 0x874);
+    if ((*(uint *)(puVar5 + 0x85c) & 0x80) == 0) {
+      uVar7 = *(void **)(puVar5 + 0x874);
     }
     else {
-      uVar7 = *(void **)(puVar4 + 0x878);
+      uVar7 = *(void **)(puVar5 + 0x878);
     }
-    sceGxmTextureSetPalette(*(undefined4 *)(puVar4 + 0x870),uVar7);
-    FUN_81013278(0,*(undefined4 *)(puVar4 + 0x870));
-    FUN_8100c288(0x3b000000,0x3b000000);
-    FUN_8100c17a(0,iVar14);
-    FUN_8100c0fc(1,uVar5 / 0x18);
-    FUN_8100cb66(0);
+    sceGxmTextureSetPalette(*(undefined4 *)(puVar5 + 0x870),uVar7);
+    FUN_81013278(0,*(undefined4 *)(puVar5 + 0x870));
+    FUN_8100c288();
+    FUN_8100c17a(0,puVar4);
+    FUN_8100c0fc(1,uVar15);
+    FUN_8100cb66();
   }
-  fVar15 = (float)(longlong)iVar12 * local_8c;
+  fVar16 = (float)(longlong)iVar14 * local_8c;
   if (local_1c4 != (int *)0x0) {
     local_1c0 = local_1c4;
     _ZdlPv();
   }
-  return ROUND(fVar15 + 0.5);
+  return ROUND(fVar16 + 0.5);
 }
 
