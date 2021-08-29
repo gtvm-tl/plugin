@@ -3,13 +3,13 @@
 #include "unk-gxm-text-draw-inner.h"
 #include "unk-gxm-text-draw.h"
 
-float unk_gxm_text_draw(int param_1,int param_2,int param_3,uint param_4,ushort *param_5)
+float unk_gxm_text_draw(int param_1,int param_2,int param_3,float param_4,ushort *param_5)
 
 {
   longlong lVar1;
   longlong lVar2;
   longlong lVar3;
-  undefined4 *puVar4;
+  float *pfVar4;
   undefined *puVar5;
   int iVar6;
   void *uVar7;
@@ -42,8 +42,8 @@ float unk_gxm_text_draw(int param_1,int param_2,int param_3,uint param_4,ushort 
   float local_a8;
   float local_a4;
   uint local_a0;
-  undefined4 *local_9c;
-  uint local_98;
+  float *local_9c;
+  float local_98;
   uint local_94;
   float local_90;
   float local_8c;
@@ -51,13 +51,13 @@ float unk_gxm_text_draw(int param_1,int param_2,int param_3,uint param_4,ushort 
   int local_84;
   int local_80;
   uint local_7c;
-  undefined4 *local_78;
+  float *local_78;
   int local_74;
   int local_70;
-  int local_6c;
+  float local_6c;
   short local_68;
   ushort *local_64;
-  uint local_60;
+  float local_60;
   char local_5c;
   int local_58;
   uint local_54;
@@ -69,13 +69,13 @@ float unk_gxm_text_draw(int param_1,int param_2,int param_3,uint param_4,ushort 
   local_b8 = 0;
   local_90 = DAT_8119d438;
   local_94 = DAT_8119d448 & 0x7f;
-  local_6c = ((param_4 >> 0x18) * 0xa0) / 0xff << 0x18;
+  local_6c = (float)((((uint)param_4 >> 0x18) * 0xa0) / 0xff << 0x18);
   local_b4 = param_3;
   local_b0 = param_1;
   local_98 = param_4;
   local_60 = param_4;
   local_58 = param_2;
-  local_9c = (undefined4 *)FUN_8100b8ca();
+  local_9c = (float *)FUN_8100b8ca();
   local_1c4 = (int *)0x0;
   iVar13 = 0;
   local_1c0 = (int *)0x0;
@@ -265,11 +265,11 @@ LAB_81008dd6:
           goto LAB_81008e2a;
         }
         if (local_1b8[0] == 0x3010) {
-          local_60 = 0xff0000ff;
+          local_60 = -1.701464e+38;
           if ((DAT_811f6628 != 0) &&
              (*(int *)(DAT_811f6628 + local_68 * 4 + 0x4c8) = local_74 + local_b0,
              *(char *)(DAT_811f6628 + local_68 + 0x4c3) != '\0')) {
-            local_60 = 0xff00ff00;
+            local_60 = -1.714652e+38;
           }
         }
         else {
@@ -287,7 +287,7 @@ LAB_81008dd6:
     } while (local_1b8[0] != 0);
   }
   iVar14 = local_74;
-  puVar4 = local_9c;
+  pfVar4 = local_9c;
   iVar13 = local_b4;
   uVar15 = (uint)((int)local_78 - (int)local_9c) / 0x18;
   if (uVar15 != 0) {
@@ -308,9 +308,9 @@ LAB_81008dd6:
       uVar7 = *(void **)(puVar5 + 0x878);
     }
     sceGxmTextureSetPalette(*(undefined4 *)(puVar5 + 0x870),uVar7);
-    FUN_81013278(0,*(undefined4 *)(puVar5 + 0x870));
+    FUN_81013278(0,*(void **)(puVar5 + 0x870));
     FUN_8100c288();
-    FUN_8100c17a(0,puVar4);
+    FUN_8100c17a(0,pfVar4);
     FUN_8100c0fc(1,uVar15);
     FUN_8100cb66();
   }

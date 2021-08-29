@@ -56,7 +56,7 @@ typedef undefined4 (*t_FUN_8100cb66) (void);
 #define FUN_8100cb66(...) ((t_FUN_8100cb66)0x8100cb66)(__VA_ARGS__)
 
 // TODO ugh...
-typedef undefined4* (*t_FUN_81008766) (undefined4, undefined4, undefined4, undefined4, undefined4, undefined4, undefined4, undefined4, undefined4, undefined4, undefined4);
+typedef float* (*t_FUN_81008766) (float, float, float, float, float, float, float, float, float, float*, float);
 #define FUN_81008766(...) ((t_FUN_81008766)0x81008766)(__VA_ARGS__)
 
 /*
