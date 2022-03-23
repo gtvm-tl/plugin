@@ -18,7 +18,7 @@ add_compile_definitions(VER_PATCHED_1_01)
 
 add_executable(gtvm-tl-dev
     main.c
-    unk-gxm-text-draw.c
+    #unk-gxm-text-draw.c
 )
 
 target_link_libraries(gtvm-tl-dev

@@ -31,8 +31,10 @@
     #define FUNC_OFFSET_draw_string_inner 0x00008f1c
     #define FUNC_VADDR_unk_utf8_to_utf16  0x8106d556
     #define FUNC_OFFSET_unk_utf8_to_utf16 0x0006d556
-    #define FUNC_VADDR_unk_gxm_text_draw  0x81008902
-    #define FUNC_OFFSET_unk_gxm_text_draw 0x00008902
+    #define FUNC_VADDR_draw_text_gxm  0x81008902
+    #define FUNC_OFFSET_draw_text_gxm 0x00008902
+    #define FUNC_VADDR_set_font_size  0x810095b8
+    #define FUNC_OFFSET_set_font_size 0x000095b8
 #endif
 #ifdef VER_UNPATCHED
     // we're not really interested in any version except the latest
