@@ -35,6 +35,10 @@
     #define FUNC_OFFSET_draw_text_gxm 0x00008902
     #define FUNC_VADDR_set_font_size  0x810095b8
     #define FUNC_OFFSET_set_font_size 0x000095b8
+    #define FUNC_VADDR_set_font_size_2  0x810095f2
+    #define FUNC_OFFSET_set_font_size_2 0x000095f2
+    #define FUNC_VADDR_init_font  0x81009778
+    #define FUNC_OFFSET_init_font 0x00009778
 #endif
 #ifdef VER_UNPATCHED
     // we're not really interested in any version except the latest
