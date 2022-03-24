@@ -32,8 +32,8 @@ void hook_draw_text_gxm(int unk1, int unk2, int unk3, uint rgba, wchar16 *text_u
 static SceUID         hook_set_font_size_hook = -1;
 static tai_hook_ref_t hook_set_font_size_ref;
 
-float hook_set_font_size(float unk1, float unk2) {
-    return TAI_NEXT(hook_set_font_size, hook_set_font_size_ref, unk1/2, unk2/2);
+float hook_set_font_size(float font_size1, float font_size2) {
+    return TAI_NEXT(hook_set_font_size, hook_set_font_size_ref, font_size1*0.9, font_size2*0.9);
 }
 
 void _start() __attribute__ ((weak, alias ("module_start")));
