@@ -18,12 +18,14 @@ add_compile_definitions(VER_PATCHED_1_01)
 
 add_executable(gtvm-tl-dev
     main.c
+    #unk-gxm-text-draw.c
 )
 
 target_link_libraries(gtvm-tl-dev
     taihen_stub
     SceKernelModulemgr_stub
     SceLibc_stub
+    SceGxm_stub
 )
 
 vita_create_self(gtvm-tl-dev.suprx gtvm-tl-dev CONFIG exports.yaml UNSAFE)

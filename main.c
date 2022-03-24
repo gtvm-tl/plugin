@@ -2,8 +2,11 @@
 #include <vitasdk.h>
 #include <psp2/kernel/error.h>
 #include <psp2/kernel/modulemgr.h>
-#include "functions.h"
 #include <stdio.h>
+#include "functions.h"
+#include "ghidra-decomp-compat.h"
+
+#include "taihen-fix-next.h"
 
 int Module_GetAddressForOffset(SceUID module_UID, unsigned segment, unsigned offset, void* out_address){
     if (out_address == NULL) return SCE_KERNEL_ERROR_INVALID_ARGUMENT;
@@ -18,28 +21,19 @@ int Module_GetAddressForOffset(SceUID module_UID, unsigned segment, unsigned off
     return 0;
 }
 
-static SceUID         hook_play_mp4_hook = -1;
-static tai_hook_ref_t hook_play_mp4_ref;
+static SceUID         hook_draw_text_gxm_hook = -1;
+static tai_hook_ref_t hook_draw_text_gxm_ref;
 
-void hook_play_mp4(char* mp4_path, uint8_t unk1, uint32_t unk2) {
-    return TAI_CONTINUE(void, hook_play_mp4_ref, "Movie/TITLE_OP_CUSTOM.mp4", unk1, unk2);
+void hook_draw_text_gxm(int unk1, int unk2, int unk3, uint rgba, wchar16 *text_utf16) {
+    // 0xFF3e0b0b
+    return TAI_CONTINUE(void, hook_draw_text_gxm_ref, unk1, unk2, unk3, rgba, text_utf16);
 }
 
-static SceUID         hook_draw_string_inner_hook = -1;
-static tai_hook_ref_t hook_draw_string_inner_ref;
+static SceUID         hook_set_font_size_hook = -1;
+static tai_hook_ref_t hook_set_font_size_ref;
 
-typedef void (*f_unk_utf8_to_utf16) (uint16_t*, int, char*);
-typedef uint32_t (*f_unk_gxm_text_draw) (int, int, uint32_t, uint32_t, uint16_t*);
-
-static f_unk_utf8_to_utf16 unk_utf8_to_utf16 = NULL;
-static f_unk_gxm_text_draw unk_gxm_text_draw = NULL;
-
-void hook_draw_string_inner(int x, int y, int unk1, int unk2, char* utf8) {
-    uint16_t utf16[128];
-
-    unk_utf8_to_utf16(utf16, 128, utf8);
-    unk_gxm_text_draw(x, y, unk1, unk2, utf16);
-    return;
+float hook_set_font_size(float font_size1, float font_size2) {
+    return TAI_NEXT(hook_set_font_size, hook_set_font_size_ref, font_size1*0.9, font_size2*0.9);
 }
 
 void _start() __attribute__ ((weak, alias ("module_start")));
@@ -48,37 +42,23 @@ int module_start(SceSize argc, const void *args) {
     tai_info.size = sizeof(tai_module_info_t);
     taiGetModuleInfo(TAI_MAIN_MODULE, &tai_info);
 
-    // fill global function pointers
-
-    Module_GetAddressForOffset(
-            tai_info.modid,
-            HOOK_FUNC_ELF_SEGMENT_INDEX,
-            FUNC_OFFSET_unk_utf8_to_utf16 | 1,
-            &unk_utf8_to_utf16);
-
-    Module_GetAddressForOffset(
-            tai_info.modid,
-            HOOK_FUNC_ELF_SEGMENT_INDEX,
-            FUNC_OFFSET_unk_gxm_text_draw | 1,
-            &unk_gxm_text_draw);
-
     // set up hooks
 
-    hook_play_mp4_hook = taiHookFunctionOffset(
-            &hook_play_mp4_ref,
+    hook_draw_text_gxm_hook = taiHookFunctionOffset(
+            &hook_draw_text_gxm_ref,
             tai_info.modid,
             HOOK_FUNC_ELF_SEGMENT_INDEX,
-            FUNC_OFFSET_play_mp4,
+            FUNC_OFFSET_draw_text_gxm,
             IS_THUMB,
-            hook_play_mp4);
+            hook_draw_text_gxm);
 
-    hook_draw_string_inner_hook = taiHookFunctionOffset(
-            &hook_draw_string_inner_ref,
+    hook_set_font_size_hook = taiHookFunctionOffset(
+            &hook_set_font_size_ref,
             tai_info.modid,
             HOOK_FUNC_ELF_SEGMENT_INDEX,
-            FUNC_OFFSET_draw_string_inner,
+            FUNC_OFFSET_set_font_size,
             IS_THUMB,
-            hook_draw_string_inner);
+            hook_set_font_size);
 
     return SCE_KERNEL_START_SUCCESS;
 }
@@ -86,8 +66,8 @@ int module_start(SceSize argc, const void *args) {
 int module_stop(SceSize argc, const void *args) {
     // release hooks
 
-    if (hook_play_mp4_hook >= 0)          taiHookRelease(hook_play_mp4_hook, hook_play_mp4_ref);
-    if (hook_draw_string_inner_hook >= 0) taiHookRelease(hook_draw_string_inner_hook, hook_draw_string_inner_ref);
+    if (hook_draw_text_gxm_hook >= 0) taiHookRelease(hook_draw_text_gxm_hook, hook_draw_text_gxm_ref);
+    if (hook_set_font_size_hook >= 0) taiHookRelease(hook_set_font_size_hook, hook_set_font_size_ref);
 
     return SCE_KERNEL_STOP_SUCCESS;
 }
